@@ -1,3 +1,5 @@
+import sys
+
 # Counting the number of words in a document
 
 def get_book_text(filepath):
@@ -5,13 +7,13 @@ def get_book_text(filepath):
         file_contents = f.read()
         return file_contents
 
-def words_string():
-    books_text = get_book_text('books/frankenstein.txt')
+def words_string(filepath):
+    books_text = get_book_text(filepath) #remove
     words = books_text.split()
     print (f'Found {len(words)} total words')
 
-def count_occurence():
-    books_text = get_book_text('books/frankenstein.txt')
+def count_occurence(filepath):
+    books_text = get_book_text(filepath)
     characters = {}
 
 #conversion to lowe case to count
@@ -23,9 +25,12 @@ def count_occurence():
             characters[char] = characters.get(char,0) + 1
 
 #print results
-    for char, count in sorted(characters.items(), key= lambda x:x[1], reverse=True):
+    for char, count in sorted(characters.items(), key= lambda x: x[1], reverse=True):
         print(f"{char}: {count}")
 
+#checking arguments and running
 
-
+if len(sys.argv) < 2:
+    print(' Usage: python3 main.py <path_to_book>')
+    sys.exit(1)
 
